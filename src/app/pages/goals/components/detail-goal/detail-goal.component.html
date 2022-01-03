@@ -1,0 +1,49 @@
+<app-header [backButton]="backButton" title="Detalles de la meta"></app-header>
+<ion-content>
+    <ion-list *ngIf="goal | async; let data">
+        <ion-item>
+            <ion-grid>
+                <ion-row>
+                    <ion-col size="4" class="text-center"
+                        ><ion-chip color="primary">{{
+                            filterGoals(data.type)
+                        }}</ion-chip></ion-col
+                    >
+                    <ion-col size="4" class="text-center">
+                        <ion-chip color="warning">{{
+                            data.notes | titlecase
+                        }}</ion-chip>
+                    </ion-col>
+                    <ion-col size="4" class="text-center">
+                        <ion-chip color="success">{{
+                            data.amount ? data.amount + " USD" : data.amount
+                        }}</ion-chip>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                    <ion-chip color="danger">{{ data.time }}</ion-chip>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+    </ion-list>
+
+    <ion-list *ngIf="rulesToShow | async; let rules">
+        <ion-list-header class="text12">Reglas</ion-list-header>
+        <ion-item>
+            <ion-grid>
+                <ion-row *ngFor="let rule of rules">
+                    <ion-col size="6" class="text-center"
+                        ><ion-chip color="primary">{{
+                            filterRules(rule.event)
+                        }}</ion-chip></ion-col
+                    >
+                    <ion-col size="6" class="text-center">
+                        <ion-chip color="success">{{
+                            rule.amount ? rule.amount + " USD" : rule.amount
+                        }}</ion-chip>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+    </ion-list>
+</ion-content>

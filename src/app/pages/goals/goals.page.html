@@ -1,0 +1,58 @@
+<app-header [title]="'Metas'"></app-header>
+<ion-content [fullscreen]="true">
+    <ion-list>
+        <ion-accordion-group *ngFor="let goal of listGoals | async">
+            <ion-accordion value="danger">
+                <ion-item slot="header">
+                    <ion-label
+                        >{{setGoalByType(goal.type)}} {{ goal.notes ? '(' +
+                        goal.notes + ')' : null}}</ion-label
+                    >
+                </ion-item>
+
+                <ion-list slot="content">
+                    <ion-item
+                        ><ion-button
+                            expand="full"
+                            fill="outline"
+                            size="small"
+                            class="full-button"
+                            [routerLink]="['/home/metas/crear-regla']"
+                            [queryParams]="{id: goal.eventId}"
+                            >Agregar regla</ion-button
+                        ></ion-item
+                    >
+                    <ion-item class="text08">
+                        <ion-button
+                            expand="full"
+                            color="success"
+                            fill="outline"
+                            size="small"
+                            class="full-button"
+                            [routerLink]="['/home/metas/detalle']"
+                            [queryParams]="{id: goal.eventId}"
+                            >Detalle de la meta</ion-button
+                        >
+                    </ion-item>
+                    <ion-item class="text08"
+                        ><ion-button
+                            expand="full"
+                            color="danger"
+                            fill="outline"
+                            size="small"
+                            class="full-button"
+                            (click)="deleteGoal(goal.eventId)"
+                            >Borrar meta</ion-button
+                        >
+                    </ion-item>
+                </ion-list>
+            </ion-accordion>
+        </ion-accordion-group>
+    </ion-list>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="redirectToCreate()">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>

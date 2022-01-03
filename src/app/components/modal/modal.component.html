@@ -1,0 +1,14 @@
+<ion-content>
+    <ion-grid>
+        <ion-datetime
+            locale="es-MX"
+            [min]="rangeDates.end"
+            size="cover"
+        ></ion-datetime>
+        <ion-row class="ion-justify-content-center">
+            <ion-button class="text-center" (click)="dismiss()"
+                >Listo</ion-button
+            >
+        </ion-row>
+    </ion-grid>
+</ion-content>

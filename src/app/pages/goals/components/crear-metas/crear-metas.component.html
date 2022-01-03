@@ -1,0 +1,82 @@
+<app-header [backButton]="backButton" [title]="'Crear meta'"></app-header>
+
+<ion-content>
+    <ion-list>
+        <form [formGroup]="form">
+            <ion-item>
+                <ion-label>Tipo de meta </ion-label>
+                <ion-select
+                    placeholder="Selecciona un tipo"
+                    formControlName="type"
+                >
+                    <ion-select-option
+                        *ngFor="let type of typesGoals"
+                        [value]="type.value"
+                        >{{ type.name }}</ion-select-option
+                    >
+                </ion-select>
+                <p
+                    class="text08"
+                    *ngIf="
+                        form.get('type').touched &&
+                        form.get('type').hasError('required')
+                    "
+                >
+                    <ion-text color="warning"> Campo requerido </ion-text>
+                </p>
+            </ion-item>
+
+            <ion-item>
+                <!-- <ion-label>Fecha </ion-label> -->
+                <ion-button
+                    expand="full"
+                    fill="outline"
+                    size="small"
+                    class="full-button"
+                    (click)="openDatesModal()"
+                    >Selecciona un plazo</ion-button
+                >
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Monto a ahorrar </ion-label>
+                <ion-input
+                    clearInput
+                    type="number"
+                    formControlName="amount"
+                    placeholder="USD"
+                ></ion-input>
+                <p
+                    class="text08"
+                    *ngIf="
+                        form.get('amount').touched &&
+                        form.get('amount').hasError('required')
+                    "
+                >
+                    <ion-text color="warning"> Campo requerido </ion-text>
+                </p>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Notas </ion-label>
+                <ion-input
+                    clearInput
+                    type="text"
+                    formControlName="notes"
+                    placeholder="Notas"
+                ></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-button
+                    size="small"
+                    class="full-button"
+                    expand="full"
+                    type="submit"
+                    (click)="getValuesForm()"
+                    >Guardar</ion-button
+                >
+            </ion-item>
+        </form>
+    </ion-list>
+</ion-content>
